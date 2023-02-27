@@ -8,13 +8,11 @@ class TodoList {
     this.displayTasks();
   }
 
-  removeTask(taskIndex, liElement) {
-    // remove the task from the DOM
+  removeTask = (taskIndex, liElement) => {
     this.contentSpan = liElement.querySelector('span');
     this.parentElement = this.contentSpan.closest('li');
     this.parentElement.remove();
 
-    // remove the task from the local storage
     const index = this.tasks.findIndex((task) => task.index === taskIndex);
     this.tasks.splice(index, 1);
     this.tasks.forEach((task, i) => {
@@ -24,7 +22,7 @@ class TodoList {
     localStorage.setItem('tasks', JSON.stringify(this.tasks));
   }
 
-  editTask(event) {
+  editTask = (event) => {
     this.todoToBeEdited = event.target.closest('.todos');
     this.contentSpan = this.todoToBeEdited.querySelector('span');
     this.inputField = document.createElement('input');
@@ -34,7 +32,6 @@ class TodoList {
     this.contentSpan.style.display = 'none';
 
     this.inputField.addEventListener('keypress', (e) => {
-      // If the key pressed is Enter, update the to-do item
       if (e.key === 'Enter') {
         e.preventDefault();
         this.description = this.inputField.value;
@@ -46,20 +43,19 @@ class TodoList {
           localStorage.setItem('tasks', JSON.stringify(this.tasks));
           this.displayTasks();
         } else {
-          // If the to-do task is empty, display an error message
           document.querySelector('.emptylist').style.display = 'block';
         }
       }
     });
   }
 
-  addTask(newTask) {
+  addTask = (newTask) => {
     this.tasks.push(newTask);
     localStorage.setItem('tasks', JSON.stringify(this.tasks));
     this.displayTasks();
   }
 
-  displayTasks() {
+  displayTasks = () => {
     this.index = this.tasks.length + 1;
     this.theTodos.innerHTML = '';
 
