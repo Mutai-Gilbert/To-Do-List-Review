@@ -55,6 +55,8 @@ class TodoList {
     this.displayTasks();
   }
 
+  // the function display task
+
   displayTasks = () => {
     this.index = this.tasks.length + 1;
     this.theTodos.innerHTML = '';
